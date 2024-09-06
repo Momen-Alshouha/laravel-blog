@@ -31,15 +31,15 @@
             <!-- Delete Confirmation Modal -->
             @include('admin.modals.delete-post-modal')
 
-             <!-- Show post Modal -->
-             @include('admin.modals.show-post-modal')
+            <!-- Show post Modal -->
+            @include('admin.modals.show-post-modal')
 
             <!-- Post List Table -->
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <?php $counter=0?>
+                            <?php $counter = 0 ?>
                             <th scope="col">#</th>
                             <th scope="col">User</th>
                             <th scope="col">Title</th>
@@ -74,33 +74,83 @@
     </div>
 </div>
 
-<!--  JavaScript for Modal Handling -->
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-        // Handle Add Post Modal
-        var addPostModal = document.getElementById('addPostModal');
-        addPostModal.addEventListener('show.bs.modal', function() {
-            var form = addPostModal.querySelector('#addPostForm');
-            form.action = "{{ route('posts.store') }}";
+        $(document).ready(function() {
+            $("#addPostForm").validate({
+                rules: {
+                    title: {
+                        required: true,
+                        minlength: 3
+                    },
+                    content: {
+                        required: true,
+                        minlength: 20
+                    }
+                },
+                messages: {
+                    title: {
+                        required: "Please enter a title",
+                        minlength: "Your title must be at least 3 characters long"
+                    },
+                    content: {
+                        required: "Please enter post content",
+                        minlength: "Your post content must be at least 20 characters long"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+
         });
 
-        // Handle Edit Post Modal
-        var editPostModal = document.getElementById('editPostModal');
-        editPostModal.addEventListener('show.bs.modal', function(event) {
-            var button = event.relatedTarget;
-            var postId = button.getAttribute('data-post-id');
-            var postTitle = button.getAttribute('data-post-title');
-            var postContent = button.getAttribute('data-post-content');
+        $(document).ready(function() {
+            $("#editPostForm").validate({
+                rules: {
+                    title: {
+                        required: true,
+                        minlength: 3
+                    },
+                    content: {
+                        required: true,
+                        minlength: 20
+                    }
+                },
+                messages: {
+                    title: {
+                        required: "Please enter a title",
+                        minlength: "Your title must be at least 3 characters long"
+                    },
+                    content: {
+                        required: "Please enter post content",
+                        minlength: "Your post content must be at least 10 characters long"
+                    }
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
 
-            var form = editPostModal.querySelector('#editPostForm');
-            form.action = '{{ url("admin/post") }}/' + postId+'/edit';
+            // Handle Edit Post Modal
+            var editPostModal = document.getElementById('editPostModal');
+            editPostModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var postId = button.getAttribute('data-post-id');
+                var postTitle = button.getAttribute('data-post-title');
+                var postContent = button.getAttribute('data-post-content');
 
-            var titleInput = editPostModal.querySelector('#editTitle');
-            var contentTextarea = editPostModal.querySelector('#editContent');
+                var form = editPostModal.querySelector('#editPostForm');
+                form.action = '{{ url("admin/post") }}/' + postId + '/edit';
 
-            titleInput.value = postTitle;
-            contentTextarea.textContent = postContent;
+                var titleInput = editPostModal.querySelector('#editTitle');
+                var contentTextarea = editPostModal.querySelector('#editContent');
+
+                titleInput.value = postTitle;
+                contentTextarea.value = postContent; 
+            });
         });
 
         // Handle Delete Post Modal

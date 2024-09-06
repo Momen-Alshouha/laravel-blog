@@ -9,13 +9,13 @@
                             <form id="editPostForm" method="POST" action="">
                                 @csrf
                                 @method('PUT')
-                                <div class="form-floating mb-3">
+                                <label for="editTitle">Title</label>
+                                <div class="P-3 mb-3">
                                     <input type="text" class="form-control" id="editTitle" name="title" placeholder="Title" required>
-                                    <label for="editTitle">Title</label>
                                 </div>
-                                <div class="form-floating">
+                                <label for="editContent">Post Content</label>
+                                <div>
                                     <textarea class="form-control" placeholder="Post Content" id="editContent" name="content" style="height: 150px;" required></textarea>
-                                    <label for="editContent">Post Content</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">Update Post</button>
                             </form>
