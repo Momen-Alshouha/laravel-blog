@@ -37,23 +37,23 @@ A simple blog application with role-based access control. It allows users to vie
 
 ## Some Screenshots
 
-![Screenshot 1](app/screenshots/login.png)
+![Screenshot 1](app/screenshoots/login.png)
 
-![Screenshot 2](app/screenshots/signup.png)
+![Screenshot 2](app/screenshoots/signup.png)
 
-![Screenshot 3](app/screenshots/home.png)
+![Screenshot 3](app/screenshoots/home.png)
 
-![Screenshot 4](app/screenshots/single-post.png)
+![Screenshot 4](app/screenshoots/single-post.png)
 
-![Screenshot 5](app/screenshots/confirm-delete-comment.png)
+![Screenshot 5](app/screenshoots/confirm-delete-comment.png)
 
-![Screenshot 6](app/screenshots/dashboard-index.png)
+![Screenshot 6](app/screenshoots/dashboard-index.png)
 
-![Screenshot 7](app/screenshots/add-new-post.png)
+![Screenshot 7](app/screenshoots/add-new-post.png)
 
-![Screenshot 8](app/screenshots/edit-post.png)
+![Screenshot 8](app/screenshoots/edit-post.png)
 
-![Screenshot 9](app/screenshots/post-details.png)
+![Screenshot 9](app/screenshoots/post-details.png)
 
 ## Installation
 
