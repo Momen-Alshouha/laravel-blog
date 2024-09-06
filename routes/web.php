@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->name('dashboard');;
+
 Route::get('/', function () {
     return view('home');
 })->name('home');;
@@ -24,6 +28,14 @@ Route::get('/about', function () {
 Route::get('/post', function () {
     return view('post');
 })->name('post');
+
+Route::get('/EditPost', function () {
+    return view('admin.EditPost');
+})->name('EditPost');
+
+Route::get('/AddPost', function () {
+    return view('admin.AddNewPost');
+})->name('AddPost');
 
 Auth::routes();
 
