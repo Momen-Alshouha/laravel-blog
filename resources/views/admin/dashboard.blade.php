@@ -16,9 +16,8 @@
         @endif
 
         <div class="bg-light rounded h-100 p-4">
-            <h6 class="mb-4">Posts</h6>
+            <h3 class="mb-4">Posts</h3>
 
-            <!-- Add New Post Button -->
             <button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addPostModal">
                 Add New Post
             </button>
@@ -28,15 +27,19 @@
 
             <!-- Edit Post Modal -->
             @include('admin.modals.edit-post-modal')
-           
+
             <!-- Delete Confirmation Modal -->
             @include('admin.modals.delete-post-modal')
+
+             <!-- Show post Modal -->
+             @include('admin.modals.show-post-modal')
 
             <!-- Post List Table -->
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
+                            <?php $counter=0?>
                             <th scope="col">#</th>
                             <th scope="col">User</th>
                             <th scope="col">Title</th>
@@ -47,11 +50,14 @@
                     <tbody>
                         @foreach($posts as $post)
                         <tr>
-                            <th scope="row">{{ $post->id }}</th>
+                            <th scope="row">{{ ++$counter }}</th>
                             <td>{{ $post->user->name }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->content }}</td>
+                            <td>{{ Str::limit($post->content, 50) }}</td>
                             <td>
+                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#showPostModal" data-post-id="{{ $post->id }}" data-post-title="{{ $post->title }}" data-post-content="{{ $post->content }}">
+                                    Show
+                                </button>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editPostModal" data-post-id="{{ $post->id }}" data-post-title="{{ $post->title }}" data-post-content="{{ $post->content }}">
                                     Edit
                                 </button>
@@ -70,24 +76,25 @@
 
 <!--  JavaScript for Modal Handling -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
+
         // Handle Add Post Modal
         var addPostModal = document.getElementById('addPostModal');
-        addPostModal.addEventListener('show.bs.modal', function () {
+        addPostModal.addEventListener('show.bs.modal', function() {
             var form = addPostModal.querySelector('#addPostForm');
-            form.action = '{{ route('posts.store') }}';
+            form.action = "{{ route('posts.store') }}";
         });
 
         // Handle Edit Post Modal
         var editPostModal = document.getElementById('editPostModal');
-        editPostModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget; 
+        editPostModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
             var postId = button.getAttribute('data-post-id');
             var postTitle = button.getAttribute('data-post-title');
             var postContent = button.getAttribute('data-post-content');
 
             var form = editPostModal.querySelector('#editPostForm');
-            form.action = '{{ url('admin/post') }}/' + postId+'/edit';
+            form.action = '{{ url("admin/post") }}/' + postId+'/edit';
 
             var titleInput = editPostModal.querySelector('#editTitle');
             var contentTextarea = editPostModal.querySelector('#editContent');
@@ -98,8 +105,8 @@
 
         // Handle Delete Post Modal
         var deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget; 
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
             var postId = button.getAttribute('data-post-id');
             var postTitle = button.getAttribute('data-post-title');
 
@@ -107,8 +114,22 @@
             var form = deleteModal.querySelector('#deleteForm');
 
             modalTitle.textContent = postTitle;
-            form.action = '{{ url('admin/post') }}/' + postId + '/delete';
+            form.action = '{{ url("admin/post") }}/' + postId + '/delete';
         });
+    });
+
+    // Handle Show Post Modal
+    var showPostModal = document.getElementById('showPostModal');
+    showPostModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var postTitle = button.getAttribute('data-post-title');
+        var postContent = button.getAttribute('data-post-content');
+
+        var titleElement = showPostModal.querySelector('#showPostTitle');
+        var contentElement = showPostModal.querySelector('#showPostContent');
+
+        titleElement.textContent = postTitle;
+        contentElement.textContent = postContent;
     });
 </script>
 

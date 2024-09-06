@@ -1,4 +1,4 @@
-<div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModalLabel" aria-hidden="true">
+<div id="addPostModal" class="modal fade" tabindex="-1" aria-labelledby="addPostModalLabel" aria-hidden="true" data-form-action="{{ route('posts.store') }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // Display a listing of the posts in dashborad
     public function DashboardIndex()
     {
         $posts = Post::all();
@@ -16,20 +15,12 @@ class PostController extends Controller
         return view('admin.dashboard', compact('posts', 'user'));
     }
 
-    // Display a listing of the posts
     public function index()
     {
         $posts = Post::all();
         return view('home', compact('posts'));
     }
 
-    // Show the form for creating a new post
-    public function create()
-    {
-        return view('admin.AddNewPost');
-    }
-
-    // Store a newly created post in the database
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -47,18 +38,9 @@ class PostController extends Controller
     // Display the specified post
     public function show(Post $post)
     {
-        // Load the post with its associated comments
         $comments = $post->comments;
 
-        // Pass the post and its comments to the view
         return view('post', compact('post', 'comments'));
-    }
-
-
-    // Show the form for editing the specified post
-    public function edit(Post $post)
-    {
-        return view('admin.EditPost', compact('post'));
     }
 
     // Update the specified post in the database

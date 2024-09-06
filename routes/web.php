@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,32 +20,17 @@ Auth::routes();
 
 require base_path('routes/dashboard.php');
 
-/*
 
-This resource route definition automatically sets up routes for the common CRUD operations:
-
-GET /posts - index
-GET /posts/create - create
-POST /posts - store
-GET /posts/{post} - show
-GET /posts/{post}/edit - edit
-PUT/PATCH /posts/{post} - update
-DELETE /posts/{post} - destroy
-
-*/
-
-
-// Custom route to display all posts
 Route::get('/', [PostController::class, 'index'])->name('HomePosts');
 
-// Custom route to display a single post
 Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->name('dashboard');;
+// Routes for authenticated users only
+Route::middleware('auth')->group(function () {
+    Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('post.comment.destroy');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('post.comment.store');
+});
 
 
 Route::get('/about', function () {
