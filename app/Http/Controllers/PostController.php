@@ -12,8 +12,8 @@ class PostController extends Controller
     public function DashboardIndex()
     {
         $posts = Post::all();
-        $user = auth()->user(); 
-        return view('admin.dashboard', compact('posts','user'));
+        $user = auth()->user();
+        return view('admin.dashboard', compact('posts', 'user'));
     }
 
     // Display a listing of the posts
@@ -47,8 +47,13 @@ class PostController extends Controller
     // Display the specified post
     public function show(Post $post)
     {
-        return view('post', compact('post'));
+        // Load the post with its associated comments
+        $comments = $post->comments;
+
+        // Pass the post and its comments to the view
+        return view('post', compact('post', 'comments'));
     }
+
 
     // Show the form for editing the specified post
     public function edit(Post $post)

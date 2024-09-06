@@ -27,32 +27,34 @@
 <section>
     <div class="container my-2 py-2">
         <div class="row d-flex">
-            <div class="col-md-12 col-lg-10">
+            <div class="col-md-12 col-lg-12">
                 <div class="card text-body">
                     <div class="card-body p-4">
-                        <h4 class="mb-0">Recent comments</h4>
+                        <h4 class="mb-0">Recent Comments</h4>
                         <p class="fw-light mb-4 pb-2">Latest Comments section by users</p>
 
+                        <!-- Loop through each comment -->
+                        @foreach($comments as $comment)
                         <div class="card-body p-4">
                             <div class="d-flex flex-start">
                                 <img class="rounded-circle shadow-1-strong me-3"
-                                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp" alt="avatar" width="60"
-                                    height="60" />
+                                    src="{{ $comment->user->avatar_url ?? 'https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp' }}" 
+                                    alt="avatar" width="60" height="60" />
                                 <div>
-                                    <h6 class="fw-bold mb-1">Betty Walker</h6>
+                                    <h6 class="fw-bold mb-1">{{ $comment->user->name }}</h6> <!-- Display the commenter's name -->
                                     <p class="mb-0 mt-1">
-                                        It uses a dictionary of over 200 Latin words, combined with a handful of
-                                        model sentence structures, to generate Lorem Ipsum which looks
-                                        reasonable. The generated Lorem Ipsum is therefore always free from
-                                        repetition, injected humour, or non-characteristic words etc.
+                                        {{ $comment->comment }} <!-- Display the comment content -->
                                     </p>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 <section>
