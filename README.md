@@ -57,7 +57,7 @@ A simple blog application with role-based access control. It allows users to vie
 
 ## Installation
 
-Before proceeding with the installation, ensure you have Apache installed and configured on your system. Additionally, make sure you have created a MySQL database named `technical_hub`.
+Before proceeding with the installation, ensure you have Apache installed and configured on your system. Additionally, make sure you have created a MySQL database named `blog`.
 
 1. **Clone the repository:**
 
