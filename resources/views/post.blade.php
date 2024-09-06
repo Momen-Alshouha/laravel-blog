@@ -52,20 +52,23 @@
                                 <button type="button" class="btn btn-danger btn-sm delete-comment-button" data-action="{{ route('post.comment.destroy', [$post->id, $comment->id]) }}">
                                     Delete
                                 </button>
+                                <button type="button" class="btn btn-secondary btn-sm edit-comment-button" 
+                                    data-action="{{ route('post.comment.update', [$post->id, $comment->id]) }}" 
+                                    data-comment="{{ $comment->comment }}">
+                                    Edit
+                                </button>
                                 @endif
                             </div>
                         </div>
                         @endforeach
-
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 <section>
     <div class="container text-body">
         <div class="row d-flex">
@@ -74,7 +77,7 @@
                     <div class="card-body p-4">
                         <div class="d-flex flex-start w-100">
                             <img class="rounded-circle shadow-1-strong me-3"
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                                src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png"
                                 alt="avatar" width="65" height="65" />
                             <div class="w-100">
                                 <h5>Add a Comment</h5>
@@ -101,6 +104,31 @@
 
 @endsection
 
+<!-- Edit Comment Modal -->
+<div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCommentForm" method="POST" action="">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <textarea class="form-control" id="editCommentText" name="comment" rows="4" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
@@ -125,7 +153,24 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const editButtons = document.querySelectorAll('.edit-comment-button');
+        const editForm = document.getElementById('editCommentForm');
+        const editCommentText = document.getElementById('editCommentText');
+        const modal = new bootstrap.Modal(document.getElementById('editCommentModal'));
 
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                editForm.action = this.getAttribute('data-action');
+                editCommentText.value = this.getAttribute('data-comment');
+                modal.show();
+            });
+        });
+    });
+</script>
+
+@section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);

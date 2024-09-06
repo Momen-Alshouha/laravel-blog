@@ -13,7 +13,7 @@ class CommentController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function storeComment(Request $request, Post $post)
     {
         $request->validate([
@@ -28,6 +28,25 @@ class CommentController extends Controller
 
         return redirect()->route('posts.show', [$post->id, 'comment' => $comment->id])
             ->with('success', 'Comment added successfully.');
+    }
+
+    public function update(Request $request, $postId, $commentId)
+    {
+        $comment = Comment::where('post_id', $postId)->findOrFail($commentId);
+
+        // Check if the authenticated user is the owner of the comment
+        if (auth()->user()->id !== $comment->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to edit this comment.');
+        }
+
+        $request->validate([
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $comment->comment = $request->input('comment');
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Comment updated successfully.');
     }
 
     public function destroy(Post $post, Comment $comment)

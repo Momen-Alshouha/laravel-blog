@@ -30,6 +30,7 @@ Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('post.comment.destroy');
     Route::post('/posts/{post}/comments', [CommentController::class, 'storeComment'])->name('post.comment.store');
+    Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('post.comment.update');
 });
 
 
