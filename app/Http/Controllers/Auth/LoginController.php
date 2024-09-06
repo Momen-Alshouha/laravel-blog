@@ -56,4 +56,20 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
+
+     /**
+     * Handle a successful login.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return \Illuminate\Http\Response
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasRole(1)) {
+            return redirect()->route('admin.dashboard.index');
+        }
+
+        return redirect()->intended($this->redirectTo);
+    }
 }
