@@ -1,7 +1,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{{ url('/') }}">Blogs</a>
+        <a class="navbar-brand" href="{{route('HomePosts')}}">Blogs</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
@@ -16,7 +16,7 @@
             <ul class="navbar-nav ms-auto">
                
                 <!-- Navigation Links -->
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('HomePosts')}}">Home</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('about') }}">About</a></li>
 
                  <!-- Authentication Links -->
