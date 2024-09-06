@@ -42,6 +42,62 @@ class CommentsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'post_id' => 3,
+                'user_id' => 1,
+                'comment' => 'This is a comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 3,
+                'user_id' => 2,
+                'comment' => 'This is another comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 6,
+                'user_id' => 3,
+                'comment' => 'This is a comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 6,
+                'user_id' => 1,
+                'comment' => 'This is another comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 4,
+                'user_id' => 1,
+                'comment' => 'This is a comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 4,
+                'user_id' => 2,
+                'comment' => 'This is another comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 5,
+                'user_id' => 1,
+                'comment' => 'This is a comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'post_id' => 5,
+                'user_id' => 2,
+                'comment' => 'This is another comment on the third post.',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ]);
     }
 }
