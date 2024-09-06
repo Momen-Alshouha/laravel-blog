@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -42,14 +43,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
-     public function posts()
-     {
-         return $this->hasMany(Post::class);
-     }
- 
-     public function comments()
-     {
-         return $this->hasMany(Comment::class);
-     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['is_admin'] ?? false;
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
+
+    public function hasRole($roleId): bool
+    {
+        return $this->roles()->where('role_id', $roleId)->exists();
+    }
 }
