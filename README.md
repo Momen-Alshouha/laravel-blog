@@ -1,66 +1,128 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Blog Application with Role-Based Access Control
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Objective
 
-## About Laravel
+A simple blog application with role-based access control. It allows users to view and comment on blog posts, while admins can manage blog posts (add, edit, delete).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **User Roles:**
+   - **Admin:** Can add, edit, and delete blog posts.
+   - **User:** Can view posts and add comments to any post.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Authentication:**
+   - Only logged-in users can perform actions (comment, manage posts).
 
-## Learning Laravel
+3. **Post Management (Admin):**
+   - Admins can add new posts, edit existing posts, and delete posts.
+   - Each post contains a title, content, and timestamp.
+   - **Simple Dashboard:** A dashboard is provided for admins to perform CRUD operations on posts.
+   - **Soft Deletes:** Instead of permanently deleting posts, the application uses soft deletes. This means posts are marked as deleted in the database but are not removed. This allows posts to be restored if needed.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Commenting (User):**
+   - Logged-in users can comment on any post.
+   - Comments are associated with the user and the post.
+   - Users can edit or delete their own comments.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+5. **User Interface:**
+   - Simple and user-friendly UI.
+   - Blade templates used for structuring views.
+   - Form validation with jQuery for a smooth user experience.
+   - Basic validation and error handling in forms.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. **Database:**
+   - Eloquent ORM is used for managing database interactions.
+   - Necessary database tables created using migrations.
+   - Sample data seeded for testing.
 
-## Laravel Sponsors
+## Some Screenshots
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+![Screenshot 1](app/screenshoots/login.png)
 
-### Premium Partners
+![Screenshot 2](app/screenshoots/signup.png)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+![Screenshot 3](app/screenshoots/home.png)
 
-## Contributing
+![Screenshot 4](app/screenshoots/single-post.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![Screenshot 5](app/screenshoots/confirm-delete-comment.png)
 
-## Code of Conduct
+![Screenshot 6](app/screenshoots/dashboard-index.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![Screenshot 7](app/screenshoots/add-new-post.png)
 
-## Security Vulnerabilities
+![Screenshot 8](app/screenshoots/edit-post.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+![Screenshot 9](app/screenshoots/post-details.png)
 
-## License
+## Installation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Before proceeding with the installation, ensure you have Apache installed and configured on your system. Additionally, make sure you have created a MySQL database named `blog`.
+
+1. **Clone the repository:**
+
+    ```
+    git clone https://github.com/Momen-Alshouha/laravel-blog.git
+    ```
+
+2. **Navigate into the project directory:**
+
+    ```
+    cd laravel-blog
+    ```
+
+3. **install dependencies**
+
+    ```
+    composer install
+    npm install
+    npm run dev
+    ```
+    
+4. **Copy `.env.example` to `.env`:**
+
+    ```
+    cp .env.example .env
+    ```
+
+5. **Generate application key:**
+
+    ```
+    php artisan key:generate
+    ```
+
+6. **Migrate the database:**
+
+    ```
+    php artisan migrate
+    ```
+
+7. **Run the database seeder:**
+
+    ```
+    php artisan db:seed
+    ```
+    
+8. **Serve the application:**
+
+    ```
+    php artisan serve
+    ```
+
+## Login Credentials
+
+### Admin
+- **Email:** ahmad@gmail.com
+- **Password:** password
+
+### User
+- **Email:** mohammed@gmail.com
+- **Password:** password
+
+
+Once the server is running, access the application through your web browser.
+
+## Note:
+
+- Ensure Apache is installed and configured properly.
+- Create a MySQL database named `blog` before running migrations.
